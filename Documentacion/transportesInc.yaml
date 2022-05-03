@@ -1,0 +1,85 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "APIS",
+    "version" : "1.0.0",
+    "title" : "APIS Transportes Inc",
+    "contact" : {
+      "name" : "Katherine Rojas",
+      "email" : "ktandrearojas@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/ktrojas/containers/1.0.0",
+  "schemes" : [ "https", "http" ],
+  "paths" : {
+    "/containers" : {
+      "post" : {
+        "tags" : [ "API" ],
+        "description" : "Api que retorna la lista de contenedores a transportar con mejor KPI",
+        "operationId" : "Request",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Request",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "contenedores registrados"
+          },
+          "400" : {
+            "description" : "datos invalidos"
+          },
+          "500" : {
+            "description" : "error de conexion"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Request" : {
+      "type" : "object",
+      "required" : [ "listaContenedores", "presupuesto" ],
+      "properties" : {
+        "presupuesto" : {
+          "type" : "integer",
+          "example" : 56787
+        },
+        "listaContenedores" : {
+          "$ref" : "#/definitions/listaContenedores"
+        }
+      }
+    },
+    "listaContenedores" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "nombreContenedor" : {
+            "type" : "string",
+            "example" : "Contenedor 1"
+          },
+          "costo" : {
+            "type" : "integer",
+            "example" : 5647
+          },
+          "kpi" : {
+            "type" : "integer",
+            "example" : 40809
+          }
+        },
+        "required" : [ "costo", "kpi", "nombreContenedor" ]
+      }
+    }
+  }
+}
